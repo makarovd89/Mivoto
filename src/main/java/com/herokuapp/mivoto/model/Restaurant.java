@@ -1,5 +1,10 @@
 package com.herokuapp.mivoto.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "restaurants_unique_name")})
 public class Restaurant extends AbstractNamedEntity {
 
     public Restaurant(){}
@@ -14,8 +19,10 @@ public class Restaurant extends AbstractNamedEntity {
         this.phone = phone;
     }
 
+    @Size(max = 100)
     private String address;
 
+    @Size(max = 50)
     private String phone;
 
     public String getAddress() {
