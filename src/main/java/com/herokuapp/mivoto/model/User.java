@@ -1,14 +1,24 @@
 package com.herokuapp.mivoto.model;
 
-import java.util.EnumSet;
-import java.util.Set;
+import org.hibernate.annotations.BatchSize;
+import org.springframework.util.CollectionUtils;
 
+import javax.persistence.*;
+import java.util.*;
+
+@Entity
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
 
     private String email;
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
     private Set<Role> roles;
 
     public User() {
@@ -27,7 +37,7 @@ public class User extends AbstractNamedEntity {
         this(id, name, email, password, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, Collection<Role> roles) {
         this(id, name, email);
         this.email = email;
         this.password = password;
@@ -58,8 +68,8 @@ public class User extends AbstractNamedEntity {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);
     }
 
     @Override
