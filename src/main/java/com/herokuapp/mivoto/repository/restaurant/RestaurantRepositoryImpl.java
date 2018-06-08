@@ -1,10 +1,10 @@
 package com.herokuapp.mivoto.repository.restaurant;
 
 import com.herokuapp.mivoto.model.Restaurant;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -41,5 +41,9 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     public List<Restaurant> getAll(){
         return crudRepository.findAll(SORT);
+    }
+
+    public List<Restaurant> getAllWithMenuByDate(LocalDate date){
+        return crudRepository.getAllWithMenuByDate(date, SORT);
     }
 }

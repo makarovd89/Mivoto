@@ -2,6 +2,7 @@ package com.herokuapp.mivoto.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "restaurants_unique_name")})
@@ -25,6 +26,9 @@ public class Restaurant extends AbstractNamedEntity {
     @Size(max = 50)
     private String phone;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private List<Menu> menu;
+
     public String getAddress() {
         return address;
     }
@@ -39,6 +43,14 @@ public class Restaurant extends AbstractNamedEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Menu> getMenu() {
+        return menu;
+    }
+
+    public void setMenu(List<Menu> menu) {
+        this.menu = menu;
     }
 
     @Override

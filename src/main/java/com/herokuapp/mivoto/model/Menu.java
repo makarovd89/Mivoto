@@ -1,14 +1,28 @@
 package com.herokuapp.mivoto.model;
 
+import org.hibernate.annotations.*;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date"}, name = "menu_unique_restaurant_and_date_idx")})
 public class Menu extends AbstractBaseEntity{
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Restaurant restaurant;
 
     private LocalDate date;
 
+    @BatchSize(size = 200)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "dishes", joinColumns = @JoinColumn(name = "menu_id", referencedColumnName = "id"))
     private Set<Dish> dishes;
 
     public Menu() {}

@@ -6,6 +6,7 @@ import com.herokuapp.mivoto.repository.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.herokuapp.mivoto.util.ValidationUtil.checkNotFoundWithId;
@@ -30,8 +31,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant get(int id) {
-        Restaurant restaurant = checkNotFoundWithId(repository.get(id),  id);
-        return restaurant;
+        return checkNotFoundWithId(repository.get(id),  id);
     }
 
     @Transactional
@@ -43,5 +43,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<Restaurant> getAll() {
         return repository.getAll();
+    }
+
+    @Override
+    public List<Restaurant> getAllWithMenuByDate(LocalDate date) {
+        return repository.getAllWithMenuByDate(date);
     }
 }

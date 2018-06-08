@@ -1,6 +1,7 @@
 package com.herokuapp.mivoto.service;
 
 import com.herokuapp.mivoto.model.Restaurant;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RestaurantService {
@@ -14,4 +15,6 @@ public interface RestaurantService {
     Restaurant get(int id);
 
     List<Restaurant> getAll();
+
+    List<Restaurant> getAllWithMenuByDate(LocalDate date);
 }
