@@ -2,8 +2,9 @@ package com.herokuapp.mivoto.service;
 
 import com.herokuapp.mivoto.model.Restaurant;
 import com.herokuapp.mivoto.repository.restaurant.RestaurantRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
@@ -17,12 +18,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     private RestaurantRepository repository;
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     @Override
     public Restaurant create(Restaurant restaurant) {
         return repository.create(restaurant);
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     @Override
     public void delete(int id) {
@@ -34,6 +37,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return checkNotFoundWithId(repository.get(id),  id);
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Transactional
     @Override
     public void update(Restaurant restaurant) {
@@ -45,6 +49,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.getAll();
     }
 
+    @Cacheable("restaurants")
     @Override
     public List<Restaurant> getAllWithMenuByDate(LocalDate date) {
         return repository.getAllWithMenuByDate(date);

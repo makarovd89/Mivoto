@@ -3,6 +3,7 @@ package com.herokuapp.mivoto.service;
 import com.herokuapp.mivoto.model.Menu;
 import com.herokuapp.mivoto.repository.menu.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
@@ -18,18 +19,21 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "restaurants", allEntries = true)
     public Menu create(Menu menu, int restaurantId) {
         return repository.save(menu, restaurantId);
     }
 
     @Override
     @Transactional
+    @CacheEvict(value = "restaurants", allEntries = true)
     public void update(Menu menu, int restaurantId) {
         checkNotFoundWithId(repository.save(menu, restaurantId), menu.getId());
     }
 
     @Override
     @Transactional
+    @CacheEvict(value = "restaurants", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
