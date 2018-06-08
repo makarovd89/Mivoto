@@ -1,3 +1,4 @@
+DELETE FROM votes;
 DELETE FROM user_roles;
 DELETE FROM dishes;
 DELETE FROM menu;
@@ -56,3 +57,8 @@ INSERT INTO dishes (description, price, menu_id) VALUES
   ('Italian meatballs', 6.25, 100019),
   ('Gennaro''s mixed grill', 19.95, 100020),
   ('Tender roasted aubergin', 9.95, 100020);
+
+INSERT INTO votes (date, user_id, restaurant_id) VALUES
+  ('2017-12-29',100000,100003),
+  ('2017-12-30',100000,100003),
+  ('2017-12-31',100000,100003);
