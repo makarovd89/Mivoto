@@ -5,18 +5,16 @@ import com.herokuapp.mivoto.model.Menu;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 
 import static com.herokuapp.mivoto.DishTestData.THE_PORKIE;
 import static com.herokuapp.mivoto.MenuTestData.*;
 import static com.herokuapp.mivoto.RestaurantTestData.RESTAURANT1_ID;
+import static org.junit.Assert.assertTrue;
 
 public class MenuServiceTest extends AbstractServiceTest {
-    @Autowired
-    private MenuService menuService;
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -65,5 +63,12 @@ public class MenuServiceTest extends AbstractServiceTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Not found entity with id: 1");
         menuService.update(new Menu( 1, LocalDate.of(2017,12,25), Collections.singleton(THE_PORKIE)), RESTAURANT1_ID + 4);
+    }
+
+    @Test
+    public void testCacheEvict(){
+        restaurantService.getAllWithMenuByDate(LocalDate.of(2017,12,30));
+        menuService.create(getCreated(), RESTAURANT1_ID + 1);
+        assertTrue(getCache().get(LocalDate.of(2017,12,30), List.class) == null);
     }
 }
