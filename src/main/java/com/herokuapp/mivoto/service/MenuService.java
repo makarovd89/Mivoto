@@ -1,16 +1,16 @@
 package com.herokuapp.mivoto.service;
 
-import com.herokuapp.mivoto.model.Menu;
+import com.herokuapp.mivoto.to.MenuTo;
 import java.time.LocalDate;
 
 public interface MenuService {
-    Menu create(Menu menu, int restaurantId);
+    MenuTo create(MenuTo menu);
 
-    void update(Menu menu, int restaurantId);
+    void update(MenuTo menu);
 
     void delete(int id);
 
-    Menu get(int id);
+    MenuTo get(int id);
 
-    Menu get(LocalDate date, Integer restaurantId);
+    MenuTo get(LocalDate date, Integer restaurantId);
 }

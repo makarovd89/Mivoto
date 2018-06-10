@@ -2,12 +2,15 @@ package com.herokuapp.mivoto.service;
 
 import com.herokuapp.mivoto.model.Menu;
 import com.herokuapp.mivoto.repository.menu.MenuRepository;
+import com.herokuapp.mivoto.to.MenuTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
+import static com.herokuapp.mivoto.util.MenuUtil.asTo;
+import static com.herokuapp.mivoto.util.MenuUtil.fromTo;
 import static com.herokuapp.mivoto.util.ValidationUtil.checkNotFound;
 import static com.herokuapp.mivoto.util.ValidationUtil.checkNotFoundWithId;
 
@@ -20,33 +23,35 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional
     @CacheEvict(value = "restaurants", allEntries = true)
-    public Menu create(Menu menu, int restaurantId) {
-        return repository.save(menu, restaurantId);
+    public MenuTo create(MenuTo menu) {
+        Menu saved = repository.save(fromTo(menu), menu.getRestaurantId());
+        return asTo(saved);
     }
 
     @Override
     @Transactional
     @CacheEvict(value = "restaurants", allEntries = true)
-    public void update(Menu menu, int restaurantId) {
-        checkNotFoundWithId(repository.save(menu, restaurantId), menu.getId());
+    public void update(MenuTo menu) {
+        checkNotFoundWithId(repository.save(fromTo(menu), menu.getRestaurantId()), menu.getId());
     }
 
     @Override
     @Transactional
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @CacheEvict(value = "restaurants", allEntries = true) // assume removal is rare
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
-    public Menu get(int id) {
-        return checkNotFoundWithId(repository.get(id), id);
+    public MenuTo get(int id) {
+        Menu menu = checkNotFoundWithId(repository.get(id), id);
+        return asTo(menu);
     }
 
     @Override
-    public Menu get(LocalDate date, Integer restaurantId) {
+    public MenuTo get(LocalDate date, Integer restaurantId) {
         Menu menu = repository.getByRestaurantId(restaurantId, date);
         checkNotFound(menu!=null, String.format("restaurantId: %d, for date: %tF", restaurantId, date));
-        return menu;
+        return asTo(menu);
     }
 }

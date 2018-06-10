@@ -3,8 +3,6 @@ package com.herokuapp.mivoto;
 import com.herokuapp.mivoto.model.Dish;
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class DishTestData {
     public static final Dish SPAGHETTI = new Dish("British crab spaghetti", new BigDecimal("14.75"));
     public static final Dish LASAGNE = new Dish("Oxtail Lasagne", new BigDecimal("13.95"));
@@ -24,8 +22,4 @@ public class DishTestData {
     public static final Dish ITALIAN_MEATBALLS = new Dish("Italian meatballs", new BigDecimal("6.25"));
     public static final Dish MIXED_GRILL = new Dish("Gennaro's mixed grill", new BigDecimal("19.95"));
     public static final Dish AUBERGIN = new Dish("Tender roasted aubergin", new BigDecimal("9.95"));
-
-    public static void assertMatch(Iterable<Dish> actual, Iterable<Dish> expected){
-        assertThat(actual).usingDefaultElementComparator().isEqualTo(expected);
-    }
 }
