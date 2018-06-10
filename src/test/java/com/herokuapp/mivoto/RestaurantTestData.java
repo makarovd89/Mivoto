@@ -21,6 +21,8 @@ public class RestaurantTestData {
     public static final Restaurant OSTERIA_MARIO = new Restaurant(RESTAURANT1_ID + 8,"Osteria Mario","Baltiyskaya St., 9","+74957907090");
     public static final Restaurant COFFEE_ROOM = new Restaurant(RESTAURANT1_ID + 9,"Coffee Room","Arbat St., 13","+74956973553");
 
+    public static final Restaurant UPDATED_BOSCO_CAFE = new Restaurant(RESTAURANT1_ID + 3,"BOSCO CAFE","Krasnaya Sq., 3","84956203182");
+
     public static final Restaurant[] RESTAURANTS = {BOSCO_CAFE,COFFEE_ROOM,DOLKABAR,SICILIANA,OSTERIA_ALBOROBELLO,OSTERIA_MARIO,PASTA_AND_BASTA,POROSELLO,SALOTTO,TERRA_MARE};
 
     public static Restaurant getCreated(){

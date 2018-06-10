@@ -46,7 +46,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void update(){
-        Restaurant updated = new Restaurant(RESTAURANT1_ID + 3,"BOSCO CAFE","Krasnaya Sq., 3","84956203182");
+        Restaurant updated = UPDATED_BOSCO_CAFE;
         restaurantService.update(updated);
         assertMatch(restaurantService.getAll(),updated,COFFEE_ROOM,DOLKABAR,SICILIANA,OSTERIA_ALBOROBELLO,OSTERIA_MARIO,PASTA_AND_BASTA,POROSELLO,SALOTTO,TERRA_MARE);
     }
