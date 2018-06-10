@@ -1,7 +1,7 @@
 package com.herokuapp.mivoto.service;
 
 import com.herokuapp.mivoto.model.Restaurant;
-
+import com.herokuapp.mivoto.to.RestaurantTo;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static com.herokuapp.mivoto.RestaurantTestData.*;
+import static com.herokuapp.mivoto.util.RestaurantsUtil.fromTo;
 import static org.junit.Assert.assertTrue;
 
 public class RestaurantServiceTest extends AbstractServiceTest {
@@ -52,9 +53,9 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void create(){
-        Restaurant created = restaurantService.create(getCreated());
+        RestaurantTo created = restaurantService.create(getCreated());
         assertMatch(restaurantService.getAll(), BOSCO_CAFE,COFFEE_ROOM,DOLKABAR,SICILIANA,OSTERIA_ALBOROBELLO,OSTERIA_MARIO,PASTA_AND_BASTA,POROSELLO,SALOTTO,TERRA_MARE,
-                created);
+                fromTo(created));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.herokuapp.mivoto;
 
 import com.herokuapp.mivoto.model.Restaurant;
+import com.herokuapp.mivoto.to.RestaurantTo;
 import java.util.Arrays;
 
 import static com.herokuapp.mivoto.model.AbstractBaseEntity.START_SEQ;
@@ -26,15 +27,15 @@ public class RestaurantTestData {
         return new Restaurant(null, "Via Romano", "Lavochkina St., 34, Moscow 125581, Russia", "+74955453480");
     }
 
-    public static void assertMatch(Restaurant actual, Restaurant expected){
+    public static void assertMatch(RestaurantTo actual, Restaurant expected){
         assertThat(actual).isEqualToIgnoringGivenFields(expected, "menu");
     }
 
-    public static void assertMatch(Iterable<Restaurant> actual, Iterable<Restaurant> expected){
+    public static void assertMatch(Iterable<RestaurantTo> actual, Iterable<Restaurant> expected){
         assertThat(actual).usingElementComparatorIgnoringFields("menu").isEqualTo(expected);
     }
 
-    public static void assertMatch(Iterable<Restaurant> actual, Restaurant... expected){
+    public static void assertMatch(Iterable<RestaurantTo> actual, Restaurant... expected){
         assertMatch(actual, Arrays.asList(expected));
     }
 }

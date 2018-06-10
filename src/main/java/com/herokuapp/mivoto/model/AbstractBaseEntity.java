@@ -1,11 +1,12 @@
 package com.herokuapp.mivoto.model;
 
+import com.herokuapp.mivoto.HasId;
 import org.hibernate.Hibernate;
 import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractBaseEntity {
+public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -31,6 +32,7 @@ public abstract class AbstractBaseEntity {
     public boolean isNew(){
         return id==null;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
