@@ -4,6 +4,7 @@ import com.herokuapp.mivoto.model.Restaurant;
 import com.herokuapp.mivoto.service.RestaurantService;
 import com.herokuapp.mivoto.to.RestaurantTo;
 
+import com.herokuapp.mivoto.to.RestaurantWithMenuTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.herokuapp.mivoto.util.ValidationUtil.assureIdConsistent;
@@ -63,7 +65,13 @@ public class RestaurantRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getRestaurants() {
-        log.info("get all restaurants {}");
+        log.info("get all restaurants");
         return restaurantService.getAll();
+    }
+
+    @GetMapping(value = "/menu/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RestaurantWithMenuTo> getRestaurantsWithMenu(@RequestParam(name = "date") LocalDate date) {
+        log.info("get all restaurants for date {}", date);
+        return restaurantService.getAllWithMenuByDate(date);
     }
 }
