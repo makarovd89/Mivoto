@@ -71,13 +71,13 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCacheable(){
-        restaurantService.getAllWithMenuByDate(LocalDate.of(2017,12,30));
+        restaurantService.getAllOnlyWithMenuByDate(LocalDate.of(2017,12,30));
         assertTrue(getCache().get(LocalDate.of(2017,12,30), List.class) != null);
     }
 
     @Test
     public void testCacheEvict(){
-        restaurantService.getAllWithMenuByDate(LocalDate.of(2017,12,30));
+        restaurantService.getAllOnlyWithMenuByDate(LocalDate.of(2017,12,30));
         restaurantService.delete(RESTAURANT1_ID + 1);
         assertTrue(getCache().get(LocalDate.of(2017,12,30), List.class) == null);
     }

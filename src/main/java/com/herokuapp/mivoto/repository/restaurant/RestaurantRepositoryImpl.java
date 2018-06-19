@@ -46,4 +46,8 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     public List<Restaurant> getAllWithMenuByDate(LocalDate date){
         return crudRepository.getAllWithMenuByDate(date, SORT);
     }
+
+    public List<Restaurant> getAllOnlyWithMenuByDate(LocalDate date){
+        return crudRepository.getAllOnlyWithMenuByDate(date, SORT);
+    }
 }

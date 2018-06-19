@@ -16,4 +16,6 @@ public interface RestaurantRepository {
     List<Restaurant> getAll();
 
     List<Restaurant> getAllWithMenuByDate(LocalDate date);
+
+    List<Restaurant> getAllOnlyWithMenuByDate(LocalDate date);
 }

@@ -3,6 +3,7 @@ package com.herokuapp.mivoto.service;
 import com.herokuapp.mivoto.model.Restaurant;
 import com.herokuapp.mivoto.repository.restaurant.RestaurantRepository;
 import com.herokuapp.mivoto.to.RestaurantTo;
+import com.herokuapp.mivoto.to.RestaurantWithMenuTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static com.herokuapp.mivoto.util.RestaurantsUtil.asTo;
+import static com.herokuapp.mivoto.util.RestaurantsUtil.asToWithMenu;
 import static com.herokuapp.mivoto.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -51,9 +53,14 @@ public class RestaurantServiceImpl implements RestaurantService {
         return asTo(repository.getAll());
     }
 
+    @Override
+    public List<RestaurantWithMenuTo> getAllWithMenuByDate(LocalDate date) {
+        return asToWithMenu(repository.getAllWithMenuByDate(date));
+    }
+
     @Cacheable("restaurants")
     @Override
-    public List<Restaurant> getAllWithMenuByDate(LocalDate date) {
-        return repository.getAllWithMenuByDate(date);
+    public List<RestaurantWithMenuTo> getAllOnlyWithMenuByDate(LocalDate date) {
+        return asToWithMenu(repository.getAllOnlyWithMenuByDate(date));
     }
 }

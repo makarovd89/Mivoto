@@ -20,7 +20,11 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Query("DELETE FROM Restaurant r WHERE r.id = :id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT r FROM Restaurant r LEFT JOIN r.menu AS m WHERE (m.date = :date)")
+    @Query("SELECT r FROM Restaurant r LEFT JOIN r.menu AS m ON m.date = :date")
     @EntityGraph(attributePaths = {"menu"}, type = EntityGraph.EntityGraphType.LOAD)
     List<Restaurant> getAllWithMenuByDate(@Param("date") LocalDate date, Sort sort);
+
+    @Query("SELECT r FROM Restaurant r LEFT JOIN r.menu AS m WHERE m.date = :date")
+    @EntityGraph(attributePaths = {"menu"}, type = EntityGraph.EntityGraphType.LOAD)
+    List<Restaurant> getAllOnlyWithMenuByDate(@Param("date") LocalDate date, Sort sort);
 }
