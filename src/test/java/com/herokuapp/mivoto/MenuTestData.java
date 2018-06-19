@@ -19,7 +19,7 @@ public class MenuTestData {
     public static final MenuTo MENU6 = new MenuTo(MENU1_ID + 5, LocalDate.of(2017,12,30), Collections.singleton(THE_TUSCAN), RESTAURANT1_ID + 5);
     public static final MenuTo MENU7 = new MenuTo(MENU1_ID + 6, LocalDate.of(2017,12,30), new HashSet<>(Arrays.asList(THE_MEETBALL, THE_JULIETTA)), RESTAURANT1_ID + 6);
     public static final MenuTo MENU8 = new MenuTo(MENU1_ID + 7, LocalDate.of(2017,12,30), new HashSet<>(Arrays.asList(PUMPKIN_ARANCINI, MUSHROOM_FRITTI, ITALIAN_MEATBALLS)), RESTAURANT1_ID + 7);
-    public static final MenuTo MENU9 = new MenuTo(MENU1_ID + 8, LocalDate.of(2017,12,31), new HashSet<>(Arrays.asList(MIXED_GRILL,AUBERGIN)), RESTAURANT1_ID);
+    public static final MenuTo MENU9 = new MenuTo(MENU1_ID + 8, LocalDate.of(2017,12,31), new HashSet<>(Arrays.asList(MIXED_GRILL,AUBERGIN)), RESTAURANT1_ID + 8);
     public static final MenuTo UPDATED_MENU1 = new MenuTo(MENU1_ID, LocalDate.of(2017,12,31), new HashSet<>(Arrays.asList(SPAGHETTI, LASAGNE, TIRAMISU, MUSHROOM_FRITTI)), RESTAURANT1_ID);
 
     public static MenuTo getCreated(){

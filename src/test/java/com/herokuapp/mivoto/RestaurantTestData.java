@@ -2,9 +2,12 @@ package com.herokuapp.mivoto;
 
 import com.herokuapp.mivoto.model.Restaurant;
 import com.herokuapp.mivoto.to.RestaurantTo;
+import com.herokuapp.mivoto.to.RestaurantWithMenuTo;
 import java.util.Arrays;
 
+import static com.herokuapp.mivoto.MenuTestData.*;
 import static com.herokuapp.mivoto.model.AbstractBaseEntity.START_SEQ;
+import static com.herokuapp.mivoto.util.RestaurantsUtil.asTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantTestData {
@@ -24,6 +27,19 @@ public class RestaurantTestData {
     public static final Restaurant UPDATED_BOSCO_CAFE = new Restaurant(RESTAURANT1_ID + 3,"BOSCO CAFE","Krasnaya Sq., 3","84956203182");
 
     public static final Restaurant[] RESTAURANTS = {BOSCO_CAFE,COFFEE_ROOM,DOLKABAR,SICILIANA,OSTERIA_ALBOROBELLO,OSTERIA_MARIO,PASTA_AND_BASTA,POROSELLO,SALOTTO,TERRA_MARE};
+
+    public static final RestaurantWithMenuTo[] RESTAURANTS2 = {
+            new RestaurantWithMenuTo(asTo(BOSCO_CAFE), MENU4),
+            new RestaurantWithMenuTo(asTo(DOLKABAR), MENU5),
+            new RestaurantWithMenuTo(asTo(SICILIANA), MENU3),
+            new RestaurantWithMenuTo(asTo(OSTERIA_ALBOROBELLO), MENU6),
+            new RestaurantWithMenuTo(asTo(PASTA_AND_BASTA), MENU8),
+            new RestaurantWithMenuTo(asTo(POROSELLO), MENU7),
+            new RestaurantWithMenuTo(asTo(SALOTTO), MENU2),
+            new RestaurantWithMenuTo(asTo(TERRA_MARE), MENU1)
+    };
+
+    public static final RestaurantWithMenuTo[] RESTAURANTS3 = {new RestaurantWithMenuTo(asTo(OSTERIA_MARIO), MENU9)};
 
     public static Restaurant getCreated(){
         return new Restaurant(null, "Via Romano", "Lavochkina St., 34, Moscow 125581, Russia", "+74955453480");
