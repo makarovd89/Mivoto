@@ -36,6 +36,10 @@ public class UserRestController {
         this.date = date;
     }
 
+    public void setTime(Supplier<LocalTime> time) {
+        this.time = time;
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/votes/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
     public void vote(@RequestParam int id) {
